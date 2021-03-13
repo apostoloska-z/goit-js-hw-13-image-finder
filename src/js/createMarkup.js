@@ -2,7 +2,7 @@ import ImageApiService from "./apiService.js";
 
 
 import photoCardMarkup from '../templates/photo-card-markup.hbs';
-import modal from '../templates/modal.hbs'
+import modal from '../templates/modal.hbs';
 
 import debounce from 'lodash.debounce'
 
@@ -22,13 +22,14 @@ const loadBtnRef = document.querySelector('.load-button');
 
 
 
-searchFormRef.addEventListener('input', debounce(imageInputHandler, 1000));
+searchFormRef.addEventListener('submit', imageInputHandler);
 loadBtnRef.addEventListener('click', onLoadMore);
 
 const imageApiService = new ImageApiService;
 
 function imageInputHandler(event) {
-    imageApiService.searchQuery = event.target.value;
+    event.preventDefault();
+    imageApiService.searchQuery = event.currentTarget.elements.query.value;
 
     if (event.target.value === '') {
         deleteMarkup();
@@ -107,4 +108,3 @@ function scroll() {
         behavior: 'smooth',
       });
 }
-
