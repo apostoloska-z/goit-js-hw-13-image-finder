@@ -2,9 +2,6 @@ import ImageApiService from "./apiService.js";
 
 
 import photoCardMarkup from '../templates/photo-card-markup.hbs';
-import modal from '../templates/modal.hbs';
-
-import debounce from 'lodash.debounce'
 
 import '@pnotify/core/dist/PNotify.css';
 import '@pnotify/core/dist/BrightTheme.css';
