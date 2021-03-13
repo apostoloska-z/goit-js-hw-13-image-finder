@@ -1,6 +1,6 @@
 {{#each this}}
 <div class="photo-card">
-  <img class='image'src="{{webformatURL}}" alt="{{tags}}" />
+  <img class='image'src="{{webformatURL}}" alt="{{tags}}" data-id="{{id}}"'/>
 
   <div class="stats">
     <p class="stats-item">
@@ -20,7 +20,7 @@
       {{downloads}}
     </p>
     <div class='image-big-place' hidden>
-      <img class='image-big'src="{{largeImageURL}}" alt="{{tags}}" />
+      <img class='image-big'src="{{largeImageURL}}" alt="{{tags}}" data-2id="{{id}}" />
     </div>
     
   </div>

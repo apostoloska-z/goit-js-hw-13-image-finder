@@ -31,7 +31,7 @@ function imageInputHandler(event) {
     event.preventDefault();
     imageApiService.searchQuery = event.currentTarget.elements.query.value;
 
-    if (event.target.value === '') {
+    if (imageApiService.searchQuery === '') {
         deleteMarkup();
         return;
     }
@@ -46,16 +46,21 @@ function imageInputHandler(event) {
 
 
         createMarkup(photoCardMarkup, images);
-        openModal();
+        images.map(image => {
+            const imgRef = document.querySelector(`[data-id="${image.id}"]`)
+            const imgInstance = basicLightbox.create(document.querySelector('.image-big-place'))
+            imgRef.addEventListener('click', imgInstance.show)
+        })
+        // openModal();
 
         
     })
 
-function openModal() {
-    const imageRef = document.querySelector('.photo-card')
-        const imgInstance = basicLightbox.create(document.querySelector('.image-big-place'))
-        imageRef.addEventListener('click', imgInstance.show)
-}
+// function openModal() {
+//     const imageRef = document.querySelector('.photo-card')
+//         const imgInstance = basicLightbox.create(document.querySelector('.image-big-place'))
+//         imageRef.addEventListener('click', imgInstance.show)
+// }
 
 };
 
