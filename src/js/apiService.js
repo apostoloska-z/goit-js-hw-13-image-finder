@@ -15,7 +15,7 @@ export default class ImageApiService {
             return response.json();
         })
         .then(({ hits }) => {
-            this.page +=1;
+            this.incrementPage();
             return hits})
     }
 
@@ -25,6 +25,14 @@ export default class ImageApiService {
 
     set query(newQuery){
         this.searchQuery = newQuery;
+    }
+
+    incrementPage() {
+        this.page +=1;
+    }
+
+    resetPage() {
+        this.page = 1;
     }
 };
 

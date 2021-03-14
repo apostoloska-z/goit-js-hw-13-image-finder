@@ -1,6 +1,5 @@
 import ImageApiService from "./apiService.js";
 
-
 import photoCardMarkup from '../templates/photo-card-markup.hbs';
 
 import '@pnotify/core/dist/PNotify.css';
@@ -9,7 +8,7 @@ import { error } from '@pnotify/core';
 import { defaults } from '@pnotify/core';
 defaults.closerHover = false;
 
-const basicLightbox = require('basiclightbox')
+import * as basicLightbox from 'basiclightbox';
 
 
 
@@ -18,18 +17,21 @@ const searchFormRef = document.querySelector('.search-form');
 const loadBtnRef = document.querySelector('.load-button');
 
 
-
+loadBtnRef.setAttribute('disabled', true);
 searchFormRef.addEventListener('submit', imageInputHandler);
-loadBtnRef.addEventListener('click', onLoadMore);
+
 
 const imageApiService = new ImageApiService;
 
 function imageInputHandler(event) {
     event.preventDefault();
     imageApiService.searchQuery = event.currentTarget.elements.query.value;
+    imageApiService.resetPage();
+    deleteMarkup();
 
     if (imageApiService.searchQuery === '') {
         deleteMarkup();
+        loadBtnRef.setAttribute('disabled', true);
         return;
     }
 
@@ -43,24 +45,18 @@ function imageInputHandler(event) {
 
 
         createMarkup(photoCardMarkup, images);
-        images.map(image => {
-            const imgRef = document.querySelector(`[data-id="${image.id}"]`)
-            const imgInstance = basicLightbox.create(document.querySelector('.image-big-place'))
-            imgRef.addEventListener('click', imgInstance.show)
-        })
-        // openModal();
-
-        
+        loadBtnRef.removeAttribute('disabled');
+        loadBtnRef.addEventListener('click', onLoadMore);
+        gallerryRef.addEventListener('click', openModal) 
     })
-
-// function openModal() {
-//     const imageRef = document.querySelector('.photo-card')
-//         const imgInstance = basicLightbox.create(document.querySelector('.image-big-place'))
-//         imageRef.addEventListener('click', imgInstance.show)
-// }
-
 };
 
+function openModal(event) {
+    if (event.target.localName === 'img') {
+        basicLightbox.create(`<img src=${event.target.id}>`).show();
+        return;
+    }
+}
 
 function onLoadMore() {
     
