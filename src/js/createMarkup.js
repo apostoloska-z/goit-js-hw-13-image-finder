@@ -32,6 +32,7 @@ function imageInputHandler(event) {
     if (imageApiService.searchQuery === '') {
         deleteMarkup();
         loadBtnRef.setAttribute('disabled', true);
+        createError('Please type something!')
         return;
     }
 
