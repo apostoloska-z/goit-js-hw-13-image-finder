@@ -53,6 +53,7 @@
     "basiclightbox": "^5.0.4",
     "core-js": "^3.9.1",
     "handlebars": "^4.7.7",
+    "infinite-scroll": "^4.0.1",
     "lodash.debounce": "^4.0.8"
   }
 }
